@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>We're doing stuff here</title>
+    <script>
+        function makeitso(action) {
+            fetch('/' + action).then(console.log(action));
+        }
+    </script>
+</head>
+<body style="max-width: 480px">
+    <button onclick="makeitso('start')">Start 'em!</button>
+    <br>
+    <button onclick="makeitso('stop')">Make it stop!</button>
+    <br>
+
+    <button onclick="makeitso('fast')">+</button>
+    <button onclick="makeitso('slow')">-</button>
+
+</body>
+</html>
