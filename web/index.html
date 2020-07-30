@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>We're doing stuff here</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
     <script>
         function makeitso(action) {
             fetch('/' + action).then(console.log(action));
@@ -8,13 +9,23 @@
     </script>
 </head>
 <body style="max-width: 480px">
-    <button onclick="makeitso('start')">Start 'em!</button>
+    <div>
+        <h2>Normal Lights</h2>
+        <button onclick="makeitso('bright')">Bright</button>
+        <button onclick="makeitso('relax')">Relax</button>
+        <button onclick="makeitso('off')">Off</button>
+    </div>
     <br>
-    <button onclick="makeitso('stop')">Make it stop!</button>
-    <br>
+    <div>
+        <h2>Party Lights</h2>
+        <button onclick="makeitso('start')">Start 'em!</button>
+        <br>
+        <button onclick="makeitso('stop')">Make it stop!</button>
+        <br>
 
-    <button onclick="makeitso('fast')">+</button>
-    <button onclick="makeitso('slow')">-</button>
+        <button onclick="makeitso('fast')">+</button>
+        <button onclick="makeitso('slow')">-</button>
 
+    </div>
 </body>
 </html>

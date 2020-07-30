@@ -37,8 +37,11 @@ class LightRunner(threading.Thread):
         if self.speed > 30:
             self.speed = 30
 
-    def _update_lights(self, group, hue, sat, bri):
+    def update_lights(self, group, hue, sat, bri):
         body = {"on": True, "sat": sat, "bri": bri, "hue": hue}
+        self.set_lights(group, body)
+
+    def set_lights(self, group, body):
         x = requests.put(
             f"http://192.168.1.155/api/{self.api_key}/groups/{group}/action",
             data=json.dumps(body))
@@ -49,9 +52,19 @@ class LightRunner(threading.Thread):
         while True:
             if self.stopped():
                 print("Party's over")
-                self._update_lights(current, 7676, 199, 144)
+                self.update_lights(current, 7676, 199, 144)
                 return
-            self._update_lights(current, random.randint(0, 65535), random.randint(0, 255), random.randint(0, 255))
+            self.update_lights(current, random.randint(0, 65535), random.randint(0, 255), random.randint(0, 255))
+            time.sleep(self.speed)
+
+    def paddys_day(self):
+        current = 3
+        while True:
+            if self.stopped():
+                print("Party's over")
+                self.update_lights(current, 7676, 199, 144)
+                return
+            self.update_lights(current, random.randint(0, 65535), random.randint(0, 255), random.randint(0, 255))
             time.sleep(self.speed)
 
 
@@ -61,6 +74,11 @@ light_thread = None
 @app.route('/')
 def get_index():
     return send_file('web/index.html')
+
+
+@app.route('/static/style.css')
+def get_style():
+    return send_file('web/static/bootstrap.min.css')
 
 
 @app.route('/start')
@@ -82,10 +100,29 @@ def speed_up():
     light_thread.speed_up()
     return ""
 
+
 @app.route('/slow')
 def speed_down():
     light_thread.speed_down()
     return ""
+
+
+@app.route('/off')
+def lights_off():
+    light_thread.stop()
+    light_thread.set_lights(3, {"on": False, "hue": 7676})
+
+
+@app.route('/relax')
+def lights_relax():
+    light_thread.stop()
+    light_thread.set_lights(3, {"on": True, "hue": 7676})
+
+
+@app.route('/bright')
+def lightz_bright():
+    light_thread.stop()
+    light_thread.set_lights(3, {"on": True, "hue": 7676})
 
 
 argument_parser = argparse.ArgumentParser(description="Bring the party to your lights")
