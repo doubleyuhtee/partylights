@@ -1,31 +1,39 @@
 <html>
 <head>
     <title>We're doing stuff here</title>
+    <link rel="stylesheet" type="text/css" href="static/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <script>
         function makeitso(action) {
             fetch('/' + action).then(console.log(action));
         }
     </script>
+
 </head>
 <body style="max-width: 480px">
-    <div>
-        <h2>Normal Lights</h2>
-        <button onclick="makeitso('bright')">Bright</button>
-        <button onclick="makeitso('relax')">Relax</button>
-        <button onclick="makeitso('off')">Off</button>
-    </div>
-    <br>
-    <div>
-        <h2>Party Lights</h2>
-        <button onclick="makeitso('start')">Start 'em!</button>
-        <br>
-        <button onclick="makeitso('stop')">Make it stop!</button>
-        <br>
+    <div class="container-fluid">
+        <div class="row" style="padding: 10px">
+            <div class="col-sm-12 col-md-6 col-lg-6 buttongroup">
+                <h2>Normal Lights</h2>
+                <button onclick="makeitso('bright')">Bright</button>
+                <button onclick="makeitso('relax')">Relax</button>
+                <button onclick="makeitso('off')">Off</button>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 buttongroup border-primary rounded">
+                <h2>Party Lights</h2>
+                <button onclick="makeitso('start')">Start 'em!</button>
+                <br>
+                <button onclick="makeitso('stop')">Make it stop!</button>
+                <br>
 
-        <button onclick="makeitso('fast')">+</button>
-        <button onclick="makeitso('slow')">-</button>
-
+                <button onclick="makeitso('fast')">+</button>
+                <button onclick="makeitso('slow')">-</button>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 buttongroup border-primary rounded">
+                <h2>PiHole</h2>
+                <button onclick="makeitso('shutyourpihole')">Show me the ads</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

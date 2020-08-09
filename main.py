@@ -76,9 +76,22 @@ def get_index():
     return send_file('web/index.html')
 
 
-@app.route('/static/style.css')
+@app.route('/static/bootstrap.css')
 def get_style():
     return send_file('web/static/bootstrap.min.css')
+
+@app.route('/static/bootstrap.min.css.map')
+def get_map_style():
+    return send_file('web/static/bootstrap.min.css.map')
+
+@app.route('/static/style.css')
+def get_more_style():
+    return send_file('web/static/style.css')
+
+@app.route('/shutyourpihole')
+def shutyourpihole():
+    res = requests.get("http://192.168.1.81/admin/api.php?disable=300&token=kknhZ5KRnFcG7E3BByM+GtzZzD3avOqlv/acDiBD+KI=")
+    return ""
 
 
 @app.route('/start')
